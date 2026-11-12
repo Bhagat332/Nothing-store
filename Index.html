@@ -1,0 +1,1274 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#cbdcc9">
+<title>NOTHING.STORE</title>
+
+<style>
+
+/* =================================
+   FONTS
+================================= */
+
+@font-face {
+  font-family: "NType 82";
+  src: url("https://db.onlinewebfonts.com/t/29dfb52229f31ac63624043cf19e8c11.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --text: #101010;
+  --muted: #777d78;
+  --line: rgba(0,0,0,.09);
+  --red: #d71920;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--text);
+  background: #dce5dc;
+  font-family: "DM Mono", "Courier New", monospace;
+  position: relative;
+  isolation: isolate;
+}
+
+button, input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* NTYPE 82 HEADINGS ONLY */
+
+h1, h2, h3,
+.logo,
+.app-name,
+.modal-app h2 {
+  font-family: "NType 82", "Courier New", monospace;
+  font-weight: 400;
+}
+
+/* =================================
+   ANIMATED PASTEL BACKGROUND
+================================= */
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: -30px;
+  z-index: -1;
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      ellipse at 12% 8%,
+      rgba(174,207,157,.95),
+      transparent 48%
+    ),
+    radial-gradient(
+      ellipse at 94% 42%,
+      rgba(230,225,168,.90),
+      transparent 48%
+    ),
+    radial-gradient(
+      ellipse at 45% 105%,
+      rgba(88,170,222,.90),
+      transparent 53%
+    ),
+    linear-gradient(
+      145deg,
+      #c6d9c1,
+      #e2e2d9 52%,
+      #b9dce0
+    );
+
+  background-size:
+    180% 180%,
+    180% 180%,
+    180% 180%,
+    180% 180%;
+
+  filter: blur(28px);
+  transform: scale(1.08);
+
+  animation: pastelFlow 18s ease-in-out infinite alternate;
+}
+
+@keyframes pastelFlow {
+
+  0% {
+    background-position:
+      0% 0%,
+      100% 20%,
+      50% 100%,
+      0% 0%;
+    transform: scale(1.08);
+  }
+
+  50% {
+    background-position:
+      100% 60%,
+      0% 80%,
+      80% 20%,
+      50% 50%;
+    transform: scale(1.13);
+  }
+
+  100% {
+    background-position:
+      30% 100%,
+      80% 0%,
+      0% 40%,
+      100% 100%;
+    transform: scale(1.08);
+  }
+}
+
+/* =================================
+   HEADER
+================================= */
+
+.header {
+  height: 68px;
+  padding: 0 6%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-bottom: 1px solid rgba(0,0,0,.07);
+
+  background: rgba(255,255,255,.55);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  position: relative;
+  z-index: 2;
+}
+
+.logo {
+  font-size: 23px;
+  letter-spacing: -.7px;
+}
+
+.logo span {
+  color: var(--red);
+}
+
+.header-status {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 11px;
+  color: #666;
+  letter-spacing: 1px;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--red);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(215,25,32,.09);
+}
+
+/* =================================
+   MAIN
+================================= */
+
+.container {
+  max-width: 1080px;
+  margin: auto;
+  padding: 0 25px;
+}
+
+/* =================================
+   HERO
+================================= */
+
+.hero {
+  padding: 65px 0 43px;
+  border-bottom: 1px solid rgba(0,0,0,.10);
+}
+
+.eyebrow {
+  color: var(--red);
+  font-size: 11px;
+  letter-spacing: 2px;
+  margin-bottom: 22px;
+}
+
+.hero h1 {
+  font-size: clamp(54px, 10vw, 94px);
+  line-height: .98;
+  letter-spacing: -3px;
+  margin: 0;
+}
+
+.hero h1 span {
+  color: var(--red);
+}
+
+.hero-description {
+  max-width: 480px;
+  margin: 22px 0 0;
+  color: #646b65;
+  font-size: 13px;
+  line-height: 2;
+}
+
+/* =================================
+   SEARCH
+================================= */
+
+.search-area {
+  padding: 25px 0 15px;
+}
+
+.search-box {
+  height: 54px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 17px;
+
+  border: 1px solid rgba(255,255,255,.8);
+  border-radius: 17px;
+
+  background: rgba(255,255,255,.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  box-shadow: 0 4px 18px rgba(50,70,60,.035);
+  transition: .2s;
+}
+
+.search-box:focus-within {
+  border-color: rgba(215,25,32,.5);
+  box-shadow: 0 0 0 3px rgba(215,25,32,.06);
+}
+
+.search-icon {
+  font-size: 23px;
+  color: #777;
+}
+
+.search-box input {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--text);
+  font-size: 12px;
+}
+
+.search-box input::placeholder {
+  color: #999;
+}
+
+/* =================================
+   CATEGORY FILTERS
+================================= */
+
+.categories {
+  display: flex;
+  gap: 22px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  border-bottom: 1px solid rgba(0,0,0,.10);
+}
+
+.categories::-webkit-scrollbar {
+  display: none;
+}
+
+.category {
+  flex-shrink: 0;
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  color: #777;
+  padding: 15px 0;
+  font-size: 11px;
+  letter-spacing: .8px;
+  transition: .2s;
+}
+
+.category.active {
+  color: var(--text);
+  border-bottom-color: var(--red);
+}
+
+/* =================================
+   SECTION TITLE
+================================= */
+
+.section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 32px 0 19px;
+}
+
+.section-title h2 {
+  font-size: 28px;
+  margin: 0;
+  letter-spacing: -.5px;
+}
+
+.app-count {
+  color: #666;
+  font-size: 11px;
+}
+
+/* =================================
+   MINIMAL APP GRID
+================================= */
+
+.app-list {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 14px;
+}
+
+/* APP CARD */
+
+.app-card {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+
+  padding: 20px 14px;
+
+  border: 1px solid rgba(255,255,255,.85);
+  border-radius: 24px;
+
+  background: rgba(255,255,255,.76);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  box-shadow: 0 5px 22px rgba(50,70,60,.055);
+
+  animation: fadeUp .3s ease both;
+
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease;
+}
+
+.app-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 13px 30px rgba(50,70,60,.10);
+}
+
+/* APP ICON */
+
+.app-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 21px;
+  object-fit: cover;
+  background: #e8eae5;
+  border: 1px solid rgba(0,0,0,.04);
+}
+
+/* APP NAME */
+
+.app-name {
+  width: 100%;
+  font-size: 19px;
+  line-height: 1.35;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+/* GET APP BUTTON */
+
+.app-action {
+  width: 100%;
+  border: 0;
+  border-radius: 30px;
+
+  background: #111;
+  color: white;
+
+  padding: 14px 10px;
+
+  font-size: 10px;
+  letter-spacing: 1px;
+
+  transition:
+    background .2s ease,
+    transform .2s ease;
+}
+
+.app-action:hover {
+  background: var(--red);
+}
+
+.app-action:active {
+  transform: scale(.97);
+}
+
+/* =================================
+   EMPTY STATE
+================================= */
+
+.empty {
+  grid-column: 1 / -1;
+  padding: 55px 10px;
+  text-align: center;
+
+  color: #707870;
+  font-size: 12px;
+
+  border: 1px solid rgba(255,255,255,.8);
+  border-radius: 22px;
+
+  background: rgba(255,255,255,.7);
+  backdrop-filter: blur(15px);
+}
+
+/* =================================
+   FOOTER
+================================= */
+
+.footer {
+  margin-top: 65px;
+  border-top: 1px solid rgba(0,0,0,.08);
+  padding: 26px 0;
+
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+
+  color: #707870;
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+/* =================================
+   APP DETAILS MODAL
+================================= */
+
+.modal-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 17px;
+
+  background: rgba(0,0,0,.42);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+}
+
+.modal-bg.show {
+  display: flex;
+}
+
+.modal {
+  width: 100%;
+  max-width: 440px;
+  max-height: 90vh;
+  overflow-y: auto;
+
+  background: rgba(248,248,245,.97);
+  padding: 27px;
+
+  border: 1px solid rgba(255,255,255,.8);
+  border-radius: 26px;
+
+  position: relative;
+  animation: modalIn .22s ease;
+}
+
+.close {
+  position: absolute;
+  right: 17px;
+  top: 15px;
+
+  width: 38px;
+  height: 38px;
+
+  border: 0;
+  border-radius: 50%;
+  background: #e9e9e6;
+
+  font-size: 24px;
+  color: var(--text);
+}
+
+.modal-label {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #858585;
+  margin-bottom: 27px;
+}
+
+.modal-app {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  padding-bottom: 23px;
+  border-bottom: 1px solid var(--line);
+}
+
+.modal-app img {
+  width: 76px;
+  height: 76px;
+  border-radius: 21px;
+  object-fit: cover;
+  background: #e9e9e9;
+}
+
+.modal-app h2 {
+  font-size: 27px;
+  margin: 0 0 9px;
+  overflow-wrap: anywhere;
+}
+
+.modal-app small {
+  color: #858585;
+  font-size: 11px;
+}
+
+.modal-description {
+  color: #626862;
+  font-size: 13px;
+  line-height: 1.9;
+  margin: 22px 0;
+  overflow-wrap: anywhere;
+}
+
+/* APP CREDITS */
+
+.credit-heading {
+  font-size: 12px;
+  letter-spacing: 2px;
+  margin: 23px 0 12px;
+}
+
+.credit {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 13px;
+}
+
+.credit span {
+  color: #858585;
+}
+
+.credit strong {
+  text-align: right;
+  overflow-wrap: anywhere;
+  font-weight: 500;
+}
+
+/* DOWNLOAD BUTTON */
+
+.download {
+  display: block;
+  margin-top: 24px;
+  padding: 19px;
+  border-radius: 16px;
+
+  text-align: center;
+  text-decoration: none;
+
+  background: #111;
+  color: white;
+
+  font-size: 12px;
+  letter-spacing: 1.2px;
+  transition: .2s;
+}
+
+.download:hover {
+  background: var(--red);
+}
+
+.download.disabled {
+  opacity: .4;
+  pointer-events: none;
+}
+
+/* =================================
+   ANIMATIONS
+================================= */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* =================================
+   MOBILE
+================================= */
+
+@media(max-width:650px) {
+
+  .header {
+    padding: 0 17px;
+    height: 64px;
+  }
+
+  .logo {
+    font-size: 20px;
+  }
+
+  .header-status {
+    font-size: 9px;
+  }
+
+  .container {
+    padding: 0 16px;
+  }
+
+  .hero {
+    padding: 56px 0 37px;
+  }
+
+  .hero h1 {
+    font-size: 56px;
+    letter-spacing: -2px;
+  }
+
+  .hero-description {
+    font-size: 12px;
+    line-height: 1.9;
+  }
+
+  .eyebrow {
+    font-size: 10px;
+  }
+
+  .search-box input {
+    font-size: 11px;
+  }
+
+  .category {
+    font-size: 10px;
+  }
+
+  .section-title h2 {
+    font-size: 25px;
+  }
+
+  .app-list {
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 11px;
+  }
+
+  .app-card {
+    padding: 17px 12px;
+    gap: 14px;
+    border-radius: 21px;
+  }
+
+  .app-icon {
+    width: 65px;
+    height: 65px;
+    border-radius: 18px;
+  }
+
+  .app-name {
+    font-size: 17px;
+  }
+
+  .app-action {
+    padding: 13px 8px;
+    font-size: 9px;
+  }
+
+  .modal {
+    padding: 23px;
+    border-radius: 24px;
+  }
+
+  .modal-label {
+    font-size: 10px;
+  }
+
+  .modal-app img {
+    width: 67px;
+    height: 67px;
+  }
+
+  .modal-app h2 {
+    font-size: 25px;
+  }
+
+  .modal-app small {
+    font-size: 10px;
+  }
+
+  .modal-description {
+    font-size: 12px;
+  }
+
+  .credit-heading {
+    font-size: 11px;
+  }
+
+  .credit {
+    font-size: 12px;
+    padding: 15px 0;
+  }
+
+  .download {
+    font-size: 11px;
+    padding: 18px;
+  }
+
+  .footer {
+    font-size: 9px;
+  }
+}
+
+@media(max-width:350px) {
+  .app-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* REDUCED MOTION */
+
+@media(prefers-reduced-motion: reduce) {
+
+  body::before {
+    animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header class="header">
+
+  <div class="logo">
+    NOTHING<span>.</span>STORE
+  </div>
+
+  <div class="header-status">
+    <span class="status-dot"></span>
+    ANDROID APPS
+  </div>
+
+</header>
+
+<main class="container">
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <div class="eyebrow">
+      DISCOVER / 001
+    </div>
+
+    <h1>
+      Apps<span>.</span><br>
+      For everyone.
+    </h1>
+
+    <p class="hero-description">
+      Discover applications made for your everyday digital life.
+      Simple. Useful. Different.
+    </p>
+
+  </section>
+
+  <!-- SEARCH -->
+
+  <section class="search-area">
+
+    <div class="search-box">
+
+      <span class="search-icon">⌕</span>
+
+      <input
+        id="search"
+        type="search"
+        placeholder="Search applications..."
+        autocomplete="off">
+
+    </div>
+
+  </section>
+
+  <!-- CATEGORIES -->
+
+  <nav class="categories">
+
+    <button class="category active" data-filter="All">
+      ALL
+    </button>
+
+    <button class="category" data-filter="Productivity">
+      PRODUCTIVITY
+    </button>
+
+    <button class="category" data-filter="Music">
+      MUSIC
+    </button>
+
+    <button class="category" data-filter="Personalization">
+      PERSONALIZATION
+    </button>
+
+    <button class="category" data-filter="Tools">
+      TOOLS
+    </button>
+
+    <button class="category" data-filter="Other">
+      OTHER
+    </button>
+
+  </nav>
+
+  <!-- APPLICATIONS -->
+
+  <section>
+
+    <div class="section-title">
+
+      <h2>Applications</h2>
+
+      <span class="app-count" id="count">
+        00 APPS
+      </span>
+
+    </div>
+
+    <div class="app-list" id="apps">
+
+      <div class="empty">
+        Loading applications...
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+
+  <footer class="footer">
+    <span>NOTHING.STORE</span>
+    <span>MADE FOR ANDROID</span>
+  </footer>
+
+</main>
+
+<!-- APP DETAILS MODAL -->
+
+<div class="modal-bg" id="modalBg">
+
+  <div class="modal">
+
+    <button class="close" id="closeModal">
+      ×
+    </button>
+
+    <div class="modal-label">
+      APPLICATION / DETAILS
+    </div>
+
+    <div class="modal-app">
+
+      <img id="modalIcon" alt="App icon">
+
+      <div>
+        <h2 id="modalName"></h2>
+        <small id="modalVersion"></small>
+      </div>
+
+    </div>
+
+    <p
+      class="modal-description"
+      id="modalDescription">
+    </p>
+
+    <div class="credit-heading">
+      APP CREDITS
+    </div>
+
+    <div class="credit">
+      <span>App Owner</span>
+      <strong id="modalOwner"></strong>
+    </div>
+
+    <div class="credit">
+      <span>Version</span>
+      <strong id="modalVersion2"></strong>
+    </div>
+
+    <div class="credit">
+      <span>Platform</span>
+      <strong id="modalPlatform"></strong>
+    </div>
+
+    <div class="credit">
+      <span>APK Size</span>
+      <strong id="modalFileSize"></strong>
+    </div>
+
+    <a
+      id="downloadLink"
+      class="download disabled"
+      href="#"
+      target="_blank"
+      rel="noopener noreferrer">
+
+      DOWNLOAD APK ↗
+
+    </a>
+
+  </div>
+
+</div>
+
+<!-- FIREBASE -->
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+
+import {
+  getFirestore,
+  collection,
+  onSnapshot
+} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+
+
+/* FIREBASE CONFIG */
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBF5HUBLgPlivFwG4pYDH1EMyyC49bVN0g",
+  authDomain: "nstore-bd8a2.firebaseapp.com",
+  projectId: "nstore-bd8a2",
+  storageBucket: "nstore-bd8a2.firebasestorage.app",
+  messagingSenderId: "81376572404",
+  appId: "1:81376572404:web:a2d3baec918390f1da3fa1",
+  measurementId: "G-HFQ8487RWP"
+};
+
+
+/* INITIALIZE FIREBASE */
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const $ = id => document.getElementById(id);
+
+let allApps = [];
+let activeFilter = "All";
+
+
+/* SAFE IMAGE */
+
+function safeImage(value) {
+
+  if (typeof value !== "string") return "";
+
+  if (
+    value.startsWith("data:image/") ||
+    value.startsWith("https://")
+  ) {
+    return value;
+  }
+
+  return "";
+}
+
+
+/* RENDER APPLICATIONS */
+
+function render() {
+
+  const term = $("search").value.trim().toLowerCase();
+
+  const filtered = allApps.filter(item => {
+
+    const matchesText = [
+      item.name,
+      item.description,
+      item.category,
+      item.platform,
+      item.owner
+    ].some(value =>
+      String(value || "").toLowerCase().includes(term)
+    );
+
+    const matchesCategory =
+      activeFilter === "All" ||
+      item.category === activeFilter;
+
+    return matchesText && matchesCategory;
+
+  });
+
+
+  $("count").textContent =
+    String(filtered.length).padStart(2,"0") + " APPS";
+
+  const list = $("apps");
+  list.innerHTML = "";
+
+
+  if (!filtered.length) {
+
+    const empty = document.createElement("div");
+
+    empty.className = "empty";
+    empty.textContent = "No applications found.";
+
+    list.append(empty);
+    return;
+
+  }
+
+
+  filtered.forEach(item => {
+
+    const card = document.createElement("article");
+    card.className = "app-card";
+
+
+    /* APP ICON */
+
+    const icon = document.createElement("img");
+
+    icon.className = "app-icon";
+    icon.alt = item.name || "App icon";
+    icon.src = safeImage(item.icon);
+
+
+    /* APP NAME */
+
+    const name = document.createElement("div");
+
+    name.className = "app-name";
+    name.textContent = item.name || "Untitled App";
+
+
+    /* GET APP BUTTON */
+
+    const button = document.createElement("button");
+
+    button.className = "app-action";
+    button.textContent = "GET APP ↗";
+
+    button.addEventListener("click",() => {
+      openDetails(item);
+    });
+
+
+    /* ONLY ICON + NAME + BUTTON */
+
+    card.append(icon,name,button);
+
+    list.append(card);
+
+  });
+
+}
+
+
+/* APP DETAILS */
+
+function openDetails(item) {
+
+  $("modalIcon").src = safeImage(item.icon);
+
+  $("modalName").textContent =
+    item.name || "Application";
+
+  $("modalVersion").textContent =
+    "VERSION " + (item.version || "1.0");
+
+  $("modalDescription").textContent =
+    item.description || "No description available.";
+
+  $("modalOwner").textContent =
+    item.owner || "Bhagat Ningwal";
+
+  $("modalVersion2").textContent =
+    item.version || "1.0";
+
+  $("modalPlatform").textContent =
+    item.platform || "Android";
+
+  $("modalFileSize").textContent =
+    item.fileSize || "Not specified";
+
+
+  /* DOWNLOAD LINK */
+
+  const link = $("downloadLink");
+  const url = String(item.downloadUrl || "");
+
+  if (/^https:\/\//i.test(url)) {
+
+    link.href = url;
+    link.classList.remove("disabled");
+
+  } else {
+
+    link.href = "#";
+    link.classList.add("disabled");
+
+  }
+
+  $("modalBg").classList.add("show");
+
+}
+
+
+/* CLOSE MODAL */
+
+function closeModal() {
+  $("modalBg").classList.remove("show");
+}
+
+$("closeModal").addEventListener("click",closeModal);
+
+$("modalBg").addEventListener("click",event => {
+
+  if (event.target === $("modalBg")) {
+    closeModal();
+  }
+
+});
+
+document.addEventListener("keydown",event => {
+
+  if (event.key === "Escape") {
+    closeModal();
+  }
+
+});
+
+
+/* SEARCH */
+
+$("search").addEventListener("input",render);
+
+
+/* CATEGORY FILTERS */
+
+document.querySelectorAll(".category").forEach(button => {
+
+  button.addEventListener("click",() => {
+
+    document.querySelector(".category.active")
+      ?.classList.remove("active");
+
+    button.classList.add("active");
+
+    activeFilter = button.dataset.filter;
+
+    render();
+
+  });
+
+});
+
+
+/* FIRESTORE LIVE DATA */
+
+onSnapshot(
+
+  collection(db,"apps"),
+
+  snapshot => {
+
+    allApps = snapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    }));
+
+    allApps.sort((a,b) =>
+      (a.name || "").localeCompare(b.name || "")
+    );
+
+    render();
+
+  },
+
+  error => {
+
+    console.error("Firebase error:",error);
+
+    const empty = document.createElement("div");
+
+    empty.className = "empty";
+    empty.textContent =
+      "Unable to load apps. Check Firebase settings.";
+
+    $("apps").replaceChildren(empty);
+
+  }
+
+);
+
+</script>
+
+</body>
+</html>
